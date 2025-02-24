@@ -1,0 +1,79 @@
+1. Taxas de Juros
+Taxa Selic e CDI:
+Série histórica diária ou mensal da taxa Selic definida pelo Banco Central.
+CDI (Certificado de Depósito Interbancário) para comparar com a Selic.
+Outras taxas de mercado:
+Taxas prefixadas e pós-fixadas dos títulos públicos.
+Curva de juros (taxas para diferentes prazos de vencimento).
+
+2. Spreads
+Spread Bancário:
+Diferença entre as taxas de captação e empréstimo praticadas pelos bancos.
+Spreads de Crédito:
+Spread entre os rendimentos dos títulos corporativos e os títulos do governo, evidenciando o risco de crédito.
+Variação histórica desses spreads para identificar períodos de maior tensão ou relaxamento no mercado.
+
+3. Índices Econômicos
+Inflação e Preços:
+Índice de Preços ao Consumidor Amplo (IPCA) e outros índices de inflação (IGP-M, por exemplo) que influenciam o comportamento das taxas de juros.
+Atividade Econômica:
+Dados do PIB, índices de confiança do consumidor e dados de emprego, que podem afetar a percepção de risco e os fluxos de investimentos.
+Indicadores Setoriais:
+Indicadores específicos que possam impactar setores relevantes para a renda fixa (ex.: indicadores do setor imobiliário, se houver vínculos com operações de crédito imobiliário).
+
+4. Histórico de Investimentos
+Desempenho dos Títulos e Fundos:
+Rentabilidade histórica de diversos produtos de renda fixa (títulos públicos, CDBs, LCIs/LCAs, debêntures etc.).
+Composição das Carteiras:
+Dados sobre alocação de ativos em carteiras de investimentos em renda fixa, incluindo informações sobre prazos, liquidez e ratings de crédito.
+Evolução de Volumes e Montantes Investidos:
+Séries históricas que mostrem a evolução dos investimentos em cada tipo de ativo, possibilitando análises de tendências e ciclos de mercado.
+
+5. Aspectos Técnicos e Metadados
+Frequência e Periodicidade:
+Definir se os dados serão coletados diariamente, semanalmente, mensalmente ou trimestralmente, conforme a disponibilidade e o nível de detalhe necessário para as análises.
+Fontes de Dados:
+Identificar as fontes oficiais e confiáveis (Banco Central, IBGE, B3, agências de rating, etc.) para garantir a qualidade e a veracidade dos dados.
+Atributos e Variáveis Adicionais:
+Data da coleta, periodicidade, metodologia de cálculo dos índices e notas explicativas que detalhem possíveis mudanças nos critérios de medição ao longo do tempo.
+
+---
+
+1. Interest Rates
+Selic Rate and CDI:
+Daily or monthly historical series of the Selic rate defined by the Central Bank.
+CDI (Interbank Deposit Certificate) to compare with the Selic rate.
+Other market rates:
+Fixed and post-fixed rates of public securities.
+Yield curve (rates for different maturities).
+
+2. Spreads
+Bank Spread:
+Difference between the rates of funding and lending practiced by banks.
+Credit Spreads:
+Spread between the yields of corporate bonds and government bonds, highlighting credit risk.
+Historical variation of these spreads to identify periods of greater tension or relaxation in the market.
+
+3. Economic Indices
+Inflation and Prices:
+Broad Consumer Price Index (IPCA) and other inflation indices (e.g., IGP-M) that influence interest rate behavior.
+Economic Activity:
+GDP data, consumer confidence indices, and employment data, which can affect risk perception and investment flows.
+Sectoral Indicators:
+Specific indicators that may impact sectors relevant to fixed income (e.g., real estate sector indicators, if linked to mortgage credit operations).
+
+4. Investment History
+Performance of Bonds and Funds:
+Historical profitability of various fixed income products (public bonds, CDBs, LCIs/LCAs, debentures, etc.).
+Portfolio Composition:
+Data on asset allocation in fixed income investment portfolios, including information on maturities, liquidity, and credit ratings.
+Evolution of Volumes and Amounts Invested:
+Historical series showing the evolution of investments in each type of asset, enabling trend and market cycle analysis.
+
+5. Technical Aspects and Metadata
+Frequency and Periodicity:
+Define whether data will be collected daily, weekly, monthly, or quarterly, according to availability and the level of detail needed for analysis.
+Data Sources:
+Identify official and reliable sources (Central Bank, IBGE, B3, rating agencies, etc.) to ensure data quality and accuracy.
+Additional Attributes and Variables:
+Collection date, periodicity, index calculation methodology, and explanatory notes detailing possible changes in measurement criteria over time.

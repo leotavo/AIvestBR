@@ -1,0 +1,97 @@
+1. Identificação da Série
+
+Nome do Indicador:
+Ex.: “Taxa Selic”, “CDI”, “Taxa Prefixada Título X”, “Taxa Pós-fixada Título Y”.
+Descrição:
+Descrever a finalidade do indicador e sua relevância para análises de renda fixa.
+
+2. Data de Referência e Atualização
+
+Data de Registro:
+Cada registro deve conter o campo “data” que indica o período (dia, mês) a que o valor se refere.
+Data de Última Atualização:
+Indicar quando o dado foi coletado ou atualizado pela última vez.
+
+3. Fonte e Procedência
+
+Fonte de Origem:
+Ex.: Banco Central para a Taxa Selic, instituições financeiras ou B3 para o CDI, e agências oficiais para demais taxas.
+Documentação da Fonte:
+Referenciar manuais ou metodologias divulgados pelas fontes para esclarecimento sobre os métodos de cálculo e eventuais revisões.
+
+4. Unidade de Medida e Padrões
+
+Unidade:
+Geralmente em porcentagem (%), mas pode incluir bases (ex.: pontos-base).
+Padrões de Medição:
+Especificar se a taxa é uma média ponderada, taxa diária acumulada, ou valor nominal do período.
+
+5. Notas e Observações
+
+Metodologia de Cálculo:
+Incluir notas que expliquem a metodologia utilizada, especialmente para séries derivadas (ex.: cálculo da curva de juros com interpolação entre prazos).
+Eventuais Alterações Históricas:
+Marcar registros ou períodos onde ocorreram mudanças na metodologia ou na forma de coleta dos dados.
+
+Exemplo Prático de Registro para Taxa Selic
+Campo	Descrição
+Nome do Indicador	Taxa Selic
+Data de Registro	2025-02-22 (exemplo)
+Valor	13,75 %
+Unidade	Porcentagem (%)
+Fonte	Banco Central
+Frequência	Diária/Mensal (definir conforme escolha)
+Data de Atualização	2025-02-23 (exemplo)
+Notas	Valor calculado conforme metodologia X; revisar se houve alteração metodológica.
+
+Com essa estrutura, os dados de taxas de juros ficarão bem organizados e documentados, facilitando análises comparativas, o desenvolvimento de dashboards e a aplicação de modelos preditivos. Cada elemento de metadado assegura rastreabilidade e transparência quanto à origem e metodologia dos dados coletados.
+
+---
+
+1. Series Identification
+
+Indicator Name:
+E.g.: “Selic Rate”, “CDI”, “Fixed Rate Title X”, “Post-fixed Rate Title Y”.
+Description:
+Describe the purpose of the indicator and its relevance for fixed income analysis.
+
+2. Reference and Update Date
+
+Record Date:
+Each record must contain the "date" field indicating the period (day, month) to which the value refers.
+Last Update Date:
+Indicate when the data was last collected or updated.
+
+3. Source and Origin
+
+Source:
+E.g.: Central Bank for the Selic Rate, financial institutions or B3 for the CDI, and official agencies for other rates.
+Source Documentation:
+Reference manuals or methodologies published by the sources to clarify calculation methods and any revisions.
+
+4. Unit of Measure and Standards
+
+Unit:
+Usually in percentage (%), but may include bases (e.g., basis points).
+Measurement Standards:
+Specify whether the rate is a weighted average, accumulated daily rate, or nominal value of the period.
+
+5. Notes and Observations
+
+Calculation Methodology:
+Include notes explaining the methodology used, especially for derived series (e.g., calculation of the yield curve with interpolation between terms).
+Historical Changes:
+Mark records or periods where there were changes in methodology or data collection methods.
+
+Practical Example of Record for Selic Rate
+Field	Description
+Indicator Name	Selic Rate
+Record Date	2025-02-22 (example)
+Value	13.75 %
+Unit	Percentage (%)
+Source	Central Bank
+Frequency	Daily/Monthly (define as chosen)
+Update Date	2025-02-23 (example)
+Notes	Value calculated according to methodology X; review if there was a methodological change.
+
+With this structure, interest rate data will be well organized and documented, facilitating comparative analysis, dashboard development, and predictive model application. Each metadata element ensures traceability and transparency regarding the origin and methodology of the collected data.

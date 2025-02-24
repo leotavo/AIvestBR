@@ -1,0 +1,65 @@
+Aspectos Técnicos
+
+1. Frequência e Periodicidade
+
+Definição da granularidade:
+Taxa Selic e CDI: Dados diários ou mensais, conforme a disponibilidade e a necessidade de análise.
+Outras taxas de mercado: Frequência pode variar de acordo com o produto (por exemplo, alguns títulos podem ter atualização diária e outros mensal).
+Consistência Temporal:
+Garantir que todas as séries sejam sincronizadas no tempo, com datas de referência alinhadas para comparações.
+
+2. Formato e Estrutura dos Dados
+
+Estrutura Tabular:
+Cada registro deve conter data, valor da taxa, unidade de medida (porcentagem) e a fonte de informação.
+Curva de Juros:
+Organização em formato de matriz ou tabela, onde cada coluna representa um prazo específico (ex.: 1 mês, 3 meses, 6 meses, 1 ano, etc.) e cada linha corresponde a uma data de registro.
+
+3. Precisão e Validação
+
+Precisão dos Dados:
+Definir a precisão (por exemplo, duas casas decimais para taxas em porcentagem).
+Rotinas de Validação:
+Implementar verificações para identificar inconsistências, dados ausentes ou valores atípicos.
+Comparar dados provenientes de diferentes fontes (quando disponível) para garantir a confiabilidade.
+
+4. Armazenamento e Integração
+
+Formato de Arquivo:
+Padronizar os formatos para facilitar o armazenamento e a integração (ex.: CSV, JSON, SQL).
+Integração com Sistemas:
+Definir APIs ou métodos de importação/exportação para integração com sistemas de análise ou dashboards.
+
+---
+
+Technical Aspects
+
+1. Frequency and Periodicity
+
+Granularity Definition:
+Selic Rate and CDI: Daily or monthly data, depending on availability and analysis needs.
+Other market rates: Frequency may vary according to the product (e.g., some securities may have daily updates and others monthly).
+Temporal Consistency:
+Ensure that all series are synchronized in time, with aligned reference dates for comparisons.
+
+2. Data Format and Structure
+
+Tabular Structure:
+Each record must contain date, rate value, unit of measure (percentage), and source of information.
+Yield Curve:
+Organized in matrix or table format, where each column represents a specific term (e.g., 1 month, 3 months, 6 months, 1 year, etc.) and each row corresponds to a record date.
+
+3. Precision and Validation
+
+Data Precision:
+Define precision (e.g., two decimal places for percentage rates).
+Validation Routines:
+Implement checks to identify inconsistencies, missing data, or outliers.
+Compare data from different sources (when available) to ensure reliability.
+
+4. Storage and Integration
+
+File Format:
+Standardize formats to facilitate storage and integration (e.g., CSV, JSON, SQL).
+System Integration:
+Define APIs or import/export methods for integration with analysis systems or dashboards.

@@ -1,0 +1,15 @@
+bump2version==1.0.1  # Version-bumping tool for software releases
+certifi==2025.1.31  # Python package for providing Mozilla's CA Bundle
+charset-normalizer==3.4.1  # Library for detecting and normalizing character encodings
+docopt==0.6.2  # Command-line interface description language
+idna==3.10  # Support for Internationalized Domain Names in Applications (IDNA)
+iniconfig==2.0.0  # Library for parsing .ini configuration files
+pillow==11.1.0  # Python Imaging Library (PIL) fork for image processing
+pip-tools==7.4.1  # Tools to keep your pinned Python dependencies fresh
+pipreqs==0.4.13  # Generate pip requirements.txt file based on imports in project
+pluggy==1.5.0  # Plugin and hook calling mechanisms for Python
+pytest==8.3.4  # Framework for testing Python code
+requests==2.32.3  # Simple HTTP library for Python
+urllib3==2.3.0  # HTTP library with thread-safe connection pooling, file post, and more
+wheel==0.45.1  # Built-package format for Python
+yarg==0.1.10  # Library for parsing and using data from PyPI

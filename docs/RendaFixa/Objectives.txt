@@ -1,0 +1,5 @@
+Objetivo
+Desenvolver um algoritmo de inteligência artificial que, utilizando séries temporais históricas e indicadores econômicos relevantes (como SELIC, CDI, IPCA, entre outros que serão definidos na etapa de coleta de dados), identifique as melhores oportunidades de compra em investimentos de renda fixa (como Tesouro Direto, CDBs e fundos). O sistema deverá possibilitar a realização de backtesting com diferentes parâmetros para validar os sinais gerados, visando proporcionar decisões de investimento mais eficientes, que maximizem a rentabilidade e reduzam o tempo dedicado à análise manual.
+
+Objective
+Develop an artificial intelligence algorithm that, using historical time series and relevant economic indicators (such as SELIC, CDI, IPCA, among others to be defined in the data collection stage), identifies the best buying opportunities in fixed income investments (such as Treasury Direct, CDBs, and funds). The system should enable backtesting with different parameters to validate the generated signals, aiming to provide more efficient investment decisions, maximizing profitability and reducing the time spent on manual analysis.
