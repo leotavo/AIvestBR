@@ -1,4 +1,4 @@
-# 📜 Changelog - Versão 0.1.2
+# 📜 Changelog - Versão 0.1.3
 \n## 🚀 Mudanças Recentes
-* Create LICENSE (Leonardo Trindade de Jesus)\n🔖 **Versão:** 0.1.2 - 2025-02-24
+* Update README.md (Leonardo Trindade de Jesus)\n🔖 **Versão:** 0.1.3 - 2025-02-24
 🌟 **Incremento:** 🐛 PATCH
