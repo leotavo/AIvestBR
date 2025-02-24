@@ -33,50 +33,50 @@ jobs:
         run: |
           if [ ! -f VERSION ]; then echo "0.0.0" > VERSION; fi
           CURRENT_VERSION=$(cat VERSION | tr -d '\r' | tr -d '\0')
-          if [[ ! $CURRENT_VERSION =~ ^[0-9]+\\.[0-9]+\\.[0-9]+$ ]]; then
+          if [[ ! $CURRENT_VERSION =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
             CURRENT_VERSION="0.0.0"
           fi
           IFS='.' read -r -a parts <<< "$CURRENT_VERSION"
           MAJOR=${parts[0]}; MINOR=${parts[1]}; PATCH=${parts[2]}
 
-          COMMIT_MSG=$(git log -1 --pretty=%B | tr -d '\\r' | tr -d '\\0')
+          COMMIT_MSG=$(git log -1 --pretty=%B | tr -d '\r' | tr -d '\0')
 
           if echo "$COMMIT_MSG" | grep -q "BREAKING CHANGE"; then
-            MAJOR=$((MAJOR + 1)); MINOR=0; PATCH=0; INCREMENTO=\"🚨 MAJOR\"
+            MAJOR=$((MAJOR + 1)); MINOR=0; PATCH=0; INCREMENTO="🚨 MAJOR"
           elif echo "$COMMIT_MSG" | grep -qi "^feat"; then
-            MINOR=$((MINOR + 1)); PATCH=0; INCREMENTO=\"✨ MINOR\"
+            MINOR=$((MINOR + 1)); PATCH=0; INCREMENTO="✨ MINOR"
           elif echo "$COMMIT_MSG" | grep -qi "^fix"; then
-            PATCH=$((PATCH + 1)); INCREMENTO=\"🐛 PATCH\"
+            PATCH=$((PATCH + 1)); INCREMENTO="🐛 PATCH"
           else
-            PATCH=$((PATCH + 1)); INCREMENTO=\"📦 PATCH Padrão\"
+            PATCH=$((PATCH + 1)); INCREMENTO="📦 PATCH Padrão"
           fi
 
-          NEW_VERSION=\"$MAJOR.$MINOR.$PATCH\"
-          echo \"$NEW_VERSION\" > VERSION
-          echo \"::set-output name=new-version::$NEW_VERSION\"
-          echo \"::set-output name=incremento::$INCREMENTO\"
+          NEW_VERSION="$MAJOR.$MINOR.$PATCH"
+          echo "$NEW_VERSION" > VERSION
+          echo "::set-output name=new-version::$NEW_VERSION"
+          echo "::set-output name=incremento::$INCREMENTO"
 
       - name: Gerar changelog avançado
         run: |
-          echo \"# 📜 Changelog - Versão ${{ steps.version-bump.outputs.new-version }}\" > CHANGELOG.md
-          echo \"\\n## 🚀 Mudanças Recentes\" >> CHANGELOG.md
-          git log --pretty=format:\"* %s (%an)\" --no-decorate -10 >> CHANGELOG.md
-          echo \"\\n🔖 **Versão:** ${{ steps.version-bump.outputs.new-version }} - $(date +'%Y-%m-%d')\" >> CHANGELOG.md
-          echo \"🌟 **Incremento:** ${{ steps.version-bump.outputs.incremento }}\" >> CHANGELOG.md
+          echo "# 📜 Changelog - Versão ${{ steps.version-bump.outputs.new-version }}" > CHANGELOG.md
+          echo "\n## 🚀 Mudanças Recentes" >> CHANGELOG.md
+          git log --pretty=format:"* %s (%an)" --no-decorate -10 >> CHANGELOG.md
+          echo "\n🔖 **Versão:** ${{ steps.version-bump.outputs.new-version }} - $(date +'%Y-%m-%d')" >> CHANGELOG.md
+          echo "🌟 **Incremento:** ${{ steps.version-bump.outputs.incremento }}" >> CHANGELOG.md
 
       - name: Commit, Tag e Push nova versão
         run: |
           git add VERSION CHANGELOG.md
-          git commit -m \"🔖 Versão ${{ steps.version-bump.outputs.new-version }} - ${{ steps.version-bump.outputs.incremento }}\"
-          git tag -a \"v${{ steps.version-bump.outputs.new-version }}\" -m \"🔖 Release ${{ steps.version-bump.outputs.new-version }}\"
+          git commit -m "🔖 Versão ${{ steps.version-bump.outputs.new-version }} - ${{ steps.version-bump.outputs.incremento }}"
+          git tag -a "v${{ steps.version-bump.outputs.new-version }}" -m "🔖 Release ${{ steps.version-bump.outputs.new-version }}"
           git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/leotavo/investment_recommendation_system.git
           git push origin main --follow-tags
 
       - name: Criar Release no GitHub com changelog formatado
         uses: softprops/action-gh-release@v1
         with:
-          tag_name: \"v${{ steps.version-bump.outputs.new-version }}\"
-          name: \"🔖 Release ${{ steps.version-bump.outputs.new-version }} - ${{ steps.version-bump.outputs.incremento }}\"
+          tag_name: "v${{ steps.version-bump.outputs.new-version }}"
+          name: "🔖 Release ${{ steps.version-bump.outputs.new-version }} - ${{ steps.version-bump.outputs.incremento }}"
           body_path: CHANGELOG.md
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
