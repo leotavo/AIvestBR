@@ -3,6 +3,16 @@ import datetime
 import webbrowser
 import logging
 
+"""
+This script is designed to fetch and display SELIC (Sistema Especial de Liquidação e de Custódia) data from the Central Bank of Brazil's API. 
+It provides functionalities to validate dates, fetch the full time series data, fetch data within a specified date range, 
+fetch the last N values, and create an HTML file to display the data in a tabular format. 
+
+The script also includes a main function that allows user interaction through the command line, 
+enabling users to choose different options for fetching and displaying the SELIC data. 
+Logging is configured to capture and display errors for better debugging and user feedback.
+"""
+
 # Configure logging
 logging.basicConfig(level=logging.ERROR, format='%(asctime)s - %(levelname)s - %(message)s')
 
@@ -39,9 +49,9 @@ def fetch_full_data():
         list: A list of dictionaries containing the SELIC data.
         None: If an error occurs during the request.
     """
-    url_api = f'{BASE_URL}.{SERIES_CODE}/dados?formato={FORMAT}'
+    api_url = f'{BASE_URL}.{SERIES_CODE}/dados?formato={FORMAT}'
     try:
-        response = requests.get(url_api)
+        response = requests.get(api_url)
         response.raise_for_status()  # Raise an HTTPError for bad responses
         return response.json()
     except requests.exceptions.RequestException as e:
@@ -64,9 +74,9 @@ def fetch_data_by_range(start_date, end_date):
     start_date = validate_date(start_date)
     end_date = validate_date(end_date)
     
-    url_api = f'{BASE_URL}.{SERIES_CODE}/dados?formato={FORMAT}&dataInicial={start_date}&dataFinal={end_date}'
+    api_url = f'{BASE_URL}.{SERIES_CODE}/dados?formato={FORMAT}&dataInicial={start_date}&dataFinal={end_date}'
     try:
-        response = requests.get(url_api)
+        response = requests.get(api_url)
         response.raise_for_status()
         return response.json()
     except requests.exceptions.RequestException as e:
@@ -89,9 +99,9 @@ def fetch_last_n_values(n):
         logging.error("The number of values must be between 1 and 20!")
         return None
        
-    url_api = f'{BASE_URL}.{SERIES_CODE}/dados/ultimos/{n}?formato={FORMAT}'
+    api_url = f'{BASE_URL}.{SERIES_CODE}/dados/ultimos/{n}?formato={FORMAT}'
     try:
-        response = requests.get(url_api)
+        response = requests.get(api_url)
         response.raise_for_status()
         return response.json()
     except requests.exceptions.RequestException as e:
