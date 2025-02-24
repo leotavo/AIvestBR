@@ -1,4 +1,4 @@
-# 📜 Changelog - Versão 0.1.0
+# 📜 Changelog - Versão 0.1.1
 \n## 🚀 Mudanças Recentes
-* feat: Add version bump workflow and update SELIC data collection script (Leonardo Trindade)\n🔖 **Versão:** 0.1.0 - 2025-02-24
-🌟 **Incremento:** ✨ MINOR
+* Merge branch 'main' of https://github.com/leotavo/investment_recommendation_system (Leonardo Trindade)\n🔖 **Versão:** 0.1.1 - 2025-02-24
+🌟 **Incremento:** 📦 PATCH Padrão
