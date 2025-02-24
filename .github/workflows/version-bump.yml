@@ -53,30 +53,30 @@ jobs:
 
           NEW_VERSION="$MAJOR.$MINOR.$PATCH"
           echo "$NEW_VERSION" > VERSION
-          echo "::set-output name=new-version::$NEW_VERSION"
-          echo "::set-output name=incremento::$INCREMENTO"
+          echo "new-version=$NEW_VERSION" >> $GITHUB_ENV
+          echo "incremento=$INCREMENTO" >> $GITHUB_ENV
 
       - name: Gerar changelog avançado
         run: |
-          echo "# 📜 Changelog - Versão ${{ steps.version-bump.outputs.new-version }}" > CHANGELOG.md
+          echo "# 📜 Changelog - Versão ${{ env.new-version }}" > CHANGELOG.md
           echo "\n## 🚀 Mudanças Recentes" >> CHANGELOG.md
           git log --pretty=format:"* %s (%an)" --no-decorate -10 >> CHANGELOG.md
-          echo "\n🔖 **Versão:** ${{ steps.version-bump.outputs.new-version }} - $(date +'%Y-%m-%d')" >> CHANGELOG.md
-          echo "🌟 **Incremento:** ${{ steps.version-bump.outputs.incremento }}" >> CHANGELOG.md
+          echo "\n🔖 **Versão:** ${{ env.new-version }} - $(date +'%Y-%m-%d')" >> CHANGELOG.md
+          echo "🌟 **Incremento:** ${{ env.incremento }}" >> CHANGELOG.md
 
       - name: Commit, Tag e Push nova versão
         run: |
           git add VERSION CHANGELOG.md
-          git commit -m "🔖 Versão ${{ steps.version-bump.outputs.new-version }} - ${{ steps.version-bump.outputs.incremento }}"
-          git tag -a "v${{ steps.version-bump.outputs.new-version }}" -m "🔖 Release ${{ steps.version-bump.outputs.new-version }}"
+          git commit -m "🔖 Versão ${{ env.new-version }} - ${{ env.incremento }}"
+          git tag -a "v${{ env.new-version }}" -m "🔖 Release ${{ env.new-version }}"
           git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/leotavo/investment_recommendation_system.git
           git push origin main --follow-tags
 
       - name: Criar Release no GitHub com changelog formatado
         uses: softprops/action-gh-release@v1
         with:
-          tag_name: "v${{ steps.version-bump.outputs.new-version }}"
-          name: "🔖 Release ${{ steps.version-bump.outputs.new-version }} - ${{ steps.version-bump.outputs.incremento }}"
+          tag_name: "v${{ env.new-version }}"
+          name: "🔖 Release ${{ env.new-version }} - ${{ env.incremento }}"
           body_path: CHANGELOG.md
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
