@@ -1,0 +1,21 @@
+# Ambiente virtual
+venv/
+__pycache__/
+*.pyc
+*.pyo
+
+# Configuração do sistema
+.DS_Store
+*.log
+
+# Arquivos de configuração sensíveis
+.env
+
+# Cache do Jupyter Notebook
+.ipynb_checkpoints/
+
+# Configurações do VS Code
+.vscode/
+
+# Arquivos gerados automaticamente
+*.sqlite3
