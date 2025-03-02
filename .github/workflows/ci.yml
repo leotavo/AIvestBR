@@ -16,7 +16,7 @@ jobs:
       - name: 🛎️ Checkout do código
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0  # Garante que todas as tags sejam puxadas
+          fetch-depth: 0  # Puxa todas as tags para evitar problemas com bump2version
 
       - name: 🐍 Configurar Python 3.11
         uses: actions/setup-python@v4
@@ -27,17 +27,28 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
-          pip install pytest
+          pip install pytest bump2version
 
       - name: ✅ Rodar testes
         run: pytest tests/
 
       - name: 🔖 Atualizar versão
         run: |
-          pip install bump2version
           git config --global user.email "github-actions@github.com"
           git config --global user.name "github-actions[bot]"
-          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/leotavo/AIvestBR.git
+          git fetch --tags  # Garante que as tags locais estejam sincronizadas
+
+          # Obtém a nova versão antes de aplicá-la
+          NEW_VERSION=$(bump2version --dry-run --list | grep new_version | cut -d= -f2)
+
+          # Se a tag já existir, apaga a versão antiga para evitar erro
+          if git rev-parse "v$NEW_VERSION" >/dev/null 2>&1; then
+            echo "⚠️ A versão v$NEW_VERSION já existe. Deletando a tag antiga..."
+            git tag -d "v$NEW_VERSION"
+            git push --delete origin "v$NEW_VERSION"
+          fi
+
+          # Atualiza a versão e faz o push
           bump2version patch
           git push origin main --follow-tags
         env:
