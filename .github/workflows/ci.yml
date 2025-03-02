@@ -3,7 +3,10 @@ name: CI
 on:
   push:
     branches:
-      - main  # Alterei de 'master' para 'main', ajuste conforme necessário
+      - main
+  pull_request:
+    branches:
+      - main
 
 jobs:
   build:
@@ -12,6 +15,8 @@ jobs:
     steps:
       - name: 🛎️ Checkout do código
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Garante que todas as tags sejam puxadas
 
       - name: 🐍 Configurar Python 3.11
         uses: actions/setup-python@v4
@@ -22,21 +27,16 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
-          pip install pytest  # Garante que pytest está instalado
 
       - name: ✅ Rodar testes
-        run: pytest
+        run: pytest tests/
 
-      - name: 🚀 Configurar Git
-        run: |
-          git config --local user.email "leotavo@gmail.com"
-          git config --local user.name "Leonardo Trindade"
-      
       - name: 🔖 Atualizar versão
         run: |
           pip install bump2version
           git config --global user.email "github-actions@github.com"
           git config --global user.name "github-actions[bot]"
+          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/leotavo/AIvestBR.git
           bump2version patch
           git push origin main --follow-tags
         env:
