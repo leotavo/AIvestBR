@@ -1,38 +1,38 @@
-# Atualizar versão do projeto python com base no commit usando o GitHub Actions
-
 name: CI
 
 on:
   push:
     branches:
-      - master
+      - main  # Alterei de 'master' para 'main', ajuste conforme necessário
 
 jobs:
+  build:
+    runs-on: ubuntu-latest
 
-    build:
-        runs-on: ubuntu-latest
-    
-        steps:
-        - uses: actions/checkout@v2
-    
-        - name: Set up Python 3.8
-        uses: actions/setup-python@v2
+    steps:
+      - name: 🛎️ Checkout do código
+        uses: actions/checkout@v4
+
+      - name: 🐍 Configurar Python 3.8
+        uses: actions/setup-python@v4
         with:
-            python-version: 3.8
-    
-        - name: Install dependencies
+          python-version: "3.8"
+
+      - name: 📦 Instalar dependências
         run: |
-            python -m pip install --upgrade pip
-            pip install -r requirements.txt
-    
-        - name: Run tests
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: ✅ Rodar testes
+        run: pytest
+
+      - name: 🚀 Configurar Git
         run: |
-            pytest
-    
-        - name: Bump version
+          git config --local user.email "leotavo@gmail.com"
+          git config --local user.name "Leonardo Trindade"
+      
+      - name: 🔖 Atualizar versão
         run: |
-            git config --local user.email "
-            git config --local user.name "
-            pip install bump2version
-            bump2version patch
-            git push --follow-tags
+          pip install bump2version
+          bump2version patch
+          git push origin main --follow-tags
