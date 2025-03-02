@@ -30,26 +30,35 @@ jobs:
           pip install pytest bump2version
 
       - name: ✅ Rodar testes
-        run: pytest tests/
+        run: |
+          echo "🔎 Executando testes com pytest..."
+          pytest tests/ || { echo "❌ Erro nos testes!"; exit 1; }
 
       - name: 🔖 Atualizar versão
         run: |
+          set -e  # Faz o script falhar em qualquer erro
+
           git config --global user.email "github-actions@github.com"
           git config --global user.name "github-actions[bot]"
-          git fetch --tags  # Garante que as tags locais estejam sincronizadas
+
+          echo "🔄 Sincronizando repositório..."
+          git fetch --tags --force  # Garante que as tags locais estão atualizadas
 
           # Obtém a nova versão antes de aplicá-la
-          NEW_VERSION=$(bump2version --dry-run --list | grep new_version | cut -d= -f2)
+          NEW_VERSION=$(bump2version --dry-run --list patch | grep new_version | cut -d= -f2)
+          echo "📢 Próxima versão detectada: v$NEW_VERSION"
 
           # Se a tag já existir, apaga a versão antiga para evitar erro
           if git rev-parse "v$NEW_VERSION" >/dev/null 2>&1; then
             echo "⚠️ A versão v$NEW_VERSION já existe. Deletando a tag antiga..."
-            git tag -d "v$NEW_VERSION"
-            git push --delete origin "v$NEW_VERSION"
+            git tag -d "v$NEW_VERSION" || true  # Apaga a tag local
+            git push --delete origin "v$NEW_VERSION" || true  # Apaga a tag remota
           fi
 
-          # Atualiza a versão e faz o push
-          bump2version patch
-          git push origin main --follow-tags
+          echo "🚀 Atualizando para v$NEW_VERSION..."
+          bump2version patch --verbose || { echo "❌ Erro no bump2version!"; exit 1; }
+
+          echo "📤 Enviando alterações para o repositório..."
+          git push origin main --follow-tags || { echo "❌ Erro ao enviar alterações!"; exit 1; }
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
