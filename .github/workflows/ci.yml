@@ -13,10 +13,10 @@ jobs:
       - name: 🛎️ Checkout do código
         uses: actions/checkout@v4
 
-      - name: 🐍 Configurar Python 3.8
+      - name: 🐍 Configurar Python 3.11
         uses: actions/setup-python@v4
         with:
-          python-version: "3.8"
+          python-version: "3.11"
 
       - name: 📦 Instalar dependências
         run: |
