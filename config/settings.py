@@ -5,7 +5,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 class Config:
-    """Classe para gerenciar as configurações do projeto."""
+    """Classe para centralizar as configurações do projeto."""
     DATABASE_URL = os.getenv("DATABASE_URL", "sqlite:///data/aivestbr.db")
     API_KEY = os.getenv("API_KEY", "SUA_CHAVE_AQUI")
     LOG_LEVEL = os.getenv("LOG_LEVEL", "INFO")

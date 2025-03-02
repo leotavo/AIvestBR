@@ -1,5 +1,6 @@
 # Ambiente virtual
 venv/
+.venv/
 __pycache__/
 *.pyc
 *.pyo
@@ -18,4 +19,4 @@ __pycache__/
 .vscode/
 
 # Arquivos gerados automaticamente
-*.sqlite3
+*.sqlite3.venv/
