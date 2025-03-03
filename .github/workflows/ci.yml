@@ -28,6 +28,7 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
           pip install pytest bump2version
+          pip install -e .  # Instala o pacote em modo editável
 
       - name: ✅ Rodar testes
         run: |
