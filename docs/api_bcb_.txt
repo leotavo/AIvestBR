@@ -1,2 +1,0 @@
-SGS - Sistema Gerenciador de Séries Temporais - v2.1
-https://www3.bcb.gov.br/sgspub/localizarseries/localizarSeries.do?method=prepararTelaLocalizarSeries
