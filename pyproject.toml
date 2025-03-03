@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "AIvestBR"  # Substitua pelo nome do seu projeto
-version = "0.1.3"
+version = "0.1.4"
 description = "Projeto de Análise de Investimentos"
 authors = [
     { name = "Leonardo Trindade", email = "leotavo@gmail.com" }
@@ -26,7 +26,7 @@ dependencies = [
 packages = ["src"]  # Certifique-se de que "src" é o diretório correto do seu projeto
 
 [tool.bumpversion]
-current_version = "0.1.3"
+current_version = "0.1.4"
 commit = true
 tag = true
 
