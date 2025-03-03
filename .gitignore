@@ -1,26 +1,73 @@
-# Ambiente virtual
+# Logs e arquivos temporários
+logs/
+*.log
+*.out
+*.tmp
+*.cache
+*.bak
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# Ambientes Virtuais
 venv/
+.env/
 .venv/
+env/
 __pycache__/
 *.pyc
 *.pyo
+*.pyd
 
-# Configuração do sistema
-.DS_Store
-*.log
+# Configurações locais
+.vscode/
+.idea/
+*.iml
 
-# Arquivos de configuração sensíveis
-.env
+# Arquivos sensíveis
+*.key
+*.pem
+*.crt
+*.pfx
+*.env
+*.secrets
+config/secrets.yaml
+config/*.ini
+config/*.json
 
-# Cache do Jupyter Notebook
+# Jupyter Notebooks
 .ipynb_checkpoints/
 
-# Configurações do VS Code
-.vscode/
+# Dados brutos
+data/raw/
+data/*.csv
+data/*.json
+data/*.parquet
+data/*.xlsx
+models/
+*.h5
+*.pkl
+*.joblib
+*.npy
 
-# Arquivos gerados automaticamente
-*.sqlite3.venv/
+# Arquivos binários
+*.exe
+*.dll
+*.so
+*.dylib
+*.o
+*.a
+*.out
+*.class
+*.jar
+*.war
+*.zip
+*.tar.gz
+*.rar
 
-# Arquivos de dados
-*.csv
-*.json
+# Dependências do Python
+pip-wheel-metadata/
+pip-log.txt
+poetry.lock
+Pipfile.lock
