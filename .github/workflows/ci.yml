@@ -32,7 +32,7 @@ jobs:
 
       - name: ✅ Rodar testes
         env:
-          PYTHONPATH: ${{ github.workspace }}
+          PYTHONPATH: ${{ github.workspace }}/src  # Adiciona o diretório src ao PYTHONPATH
         run: |
           echo "🔎 Executando testes com pytest..."
           pytest tests/ || { echo "❌ Erro nos testes!"; exit 1; }
