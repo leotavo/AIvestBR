@@ -5,16 +5,12 @@ logs/
 *.tmp
 *.cache
 *.bak
-*.swp
-*.swo
 .DS_Store
 Thumbs.db
 
 # Ambientes Virtuais
 venv/
-.env/
 .venv/
-env/
 __pycache__/
 *.pyc
 *.pyo
