@@ -31,6 +31,8 @@ jobs:
           pip install -e .  # Instala o pacote em modo editável
 
       - name: ✅ Rodar testes
+        env:
+          PYTHONPATH: ${{ github.workspace }}
         run: |
           echo "🔎 Executando testes com pytest..."
           pytest tests/ || { echo "❌ Erro nos testes!"; exit 1; }
