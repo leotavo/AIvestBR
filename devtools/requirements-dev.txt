@@ -1,7 +1,0 @@
-pytest
-requests
-bump2version==1.0.1
-openai>=1.0.0
-deep-translator==1.11.4
-langdetect==1.0.9
-httpx==0.13.3

@@ -8,7 +8,13 @@ logs/
 .DS_Store
 Thumbs.db
 
-# Ambientes Virtuais
+# Arquivos de configuração local e credenciais
+.vscode/
+config/*.env  # ⚠️ Arquivo sensível, deve ser removido do Git
+.bumpversion.cfg
+
+# Ambientes virtuais
+env/
 venv/
 .venv/
 __pycache__/
@@ -16,27 +22,8 @@ __pycache__/
 *.pyo
 *.pyd
 
-# Configurações locais
-.vscode/
-.idea/
-*.iml
-
-# Arquivos sensíveis
-*.key
-*.pem
-*.crt
-*.pfx
-*.env
-*.secrets
-config/secrets.yaml
-config/*.ini
-config/*.json
-
-# Jupyter Notebooks
-.ipynb_checkpoints/
-
-# Dados brutos
-data/raw/
+# Dados brutos e saídas de processamento
+data/
 data/*.csv
 data/*.json
 data/*.parquet
@@ -47,7 +34,11 @@ models/
 *.joblib
 *.npy
 
-# Arquivos binários
+# Arquivos de documentação temporária
+docs/*.txt
+docs/*.csv
+
+# Arquivos binários e compilados
 *.exe
 *.dll
 *.so
@@ -62,7 +53,7 @@ models/
 *.tar.gz
 *.rar
 
-# Dependências do Python
+# Dependências Python
 pip-wheel-metadata/
 pip-log.txt
 poetry.lock
