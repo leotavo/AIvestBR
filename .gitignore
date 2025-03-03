@@ -57,4 +57,4 @@ docs/*.csv
 pip-wheel-metadata/
 pip-log.txt
 poetry.lock
-Pipfile.lock
+Pipfile.lockconfig/*.env.backup
