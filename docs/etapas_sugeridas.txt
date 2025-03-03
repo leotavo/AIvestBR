@@ -1,0 +1,6 @@
+Configuração do ambiente (se ainda não configurado). Ok
+Coleta de dados financeiros (em data_ingestion/).
+Pré-processamento dos dados (em preprocessing/).
+Análise exploratória de dados (em notebooks/).
+Modelagem preditiva (em forecasting/).
+Geração de relatórios automatizados (em utils/ e notebooks/).

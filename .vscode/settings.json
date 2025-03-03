@@ -1,0 +1,17 @@
+{
+    // ...existing settings...
+    "terminal.integrated.defaultLocation": "view",
+    "python.terminal.activateEnvInCurrentTerminal": true,
+    "python.autoComplete.extraPaths": [
+        "D:/OneDrive - ANVISA - Agencia Nacional de Vigilancia Sanitaria/ESTUDOS/PROJETOS TI/AIvestBR/src"
+    ],
+    "python.testing.unittestArgs": [
+        "-v",
+        "-s",
+        "./tests",
+        "-p",
+        "test_*.py"
+    ],
+    "python.testing.pytestEnabled": false,
+    "python.testing.unittestEnabled": true
+}
