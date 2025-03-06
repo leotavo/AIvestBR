@@ -50,8 +50,14 @@ jobs:
           echo "🔄 Sincronizando repositório..."
           git fetch --tags --force  # Garante que as tags locais estão atualizadas
 
-          echo "🚀 Atualizando versão com commitizen..."
-          cz bump --yes --check-consistency || { echo "❌ Erro no commitizen!"; exit 1; }
+          # Verifica se a tag já existe antes de tentar criar uma nova tag
+          TAG=$(cz bump --dry-run --check-consistency | grep 'tag to create:' | awk '{print $4}')
+          if git rev-parse "$TAG" >/dev/null 2>&1; then
+            echo "⚠️ Tag $TAG já existe! Continuando sem criar nova tag."
+          else
+            echo "🚀 Atualizando versão com commitizen..."
+            cz bump --yes --check-consistency || { echo "❌ Erro no commitizen!"; exit 1; }
+          fi
 
           echo "📄 Gerando changelog..."
           cz changelog || { echo "❌ Erro ao gerar changelog!"; exit 1; }
@@ -60,14 +66,6 @@ jobs:
           git add CHANGELOG.md
           git commit -m "docs: update changelog"
           git push origin main --follow-tags || { echo "❌ Erro ao enviar alterações!"; exit 1; }
-
-          # Verifica se a tag já existe antes de tentar criar uma nova tag
-          TAG=$(cz bump --dry-run --check-consistency | grep 'tag to create:' | awk '{print $4}')
-          if git rev-parse "$TAG" >/dev/null 2>&1; then
-            echo "❌ Tag $TAG já existe!"
-            exit 1
-          fi
-
           git push --tags || { echo "❌ Erro ao enviar tags!"; exit 1; }
         shell: /usr/bin/bash -e {0}
         env:
