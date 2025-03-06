@@ -23,12 +23,15 @@ jobs:
         with:
           python-version: "3.11"
 
-      - name: 📦 Instalar dependências
+      - name: 📦 Instalar dependências do projeto
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
-          pip install pytest bump2version
           pip install -e .  # Instala o pacote em modo editável
+
+      - name: 📦 Instalar dependências do workflow
+        run: |
+          pip install -r .github/requirements-ci.txt
 
       - name: ✅ Rodar testes
         env:
@@ -37,7 +40,7 @@ jobs:
           echo "🔎 Executando testes com pytest..."
           pytest tests/ || { echo "❌ Erro nos testes!"; exit 1; }
 
-      - name: 🔖 Atualizar versão
+      - name: 🔖 Atualizar versão e gerar changelog
         run: |
           set -e  # Faz o script falhar em qualquer erro
 
@@ -47,21 +50,15 @@ jobs:
           echo "🔄 Sincronizando repositório..."
           git fetch --tags --force  # Garante que as tags locais estão atualizadas
 
-          # Obtém a nova versão antes de aplicá-la
-          NEW_VERSION=$(bump2version --dry-run --list patch | grep new_version | cut -d= -f2)
-          echo "📢 Próxima versão detectada: v$NEW_VERSION"
+          echo "🚀 Atualizando versão com commitizen..."
+          cz bump --yes --check-consistency || { echo "❌ Erro no commitizen!"; exit 1; }
 
-          # Se a tag já existir, apaga a versão antiga para evitar erro
-          if git rev-parse "v$NEW_VERSION" >/dev/null 2>&1; then
-            echo "⚠️ A versão v$NEW_VERSION já existe. Deletando a tag antiga..."
-            git tag -d "v$NEW_VERSION" || true  # Apaga a tag local
-            git push --delete origin "v$NEW_VERSION" || true  # Apaga a tag remota
-          fi
-
-          echo "🚀 Atualizando para v$NEW_VERSION..."
-          bump2version patch --verbose || { echo "❌ Erro no bump2version!"; exit 1; }
+          echo "📄 Gerando changelog..."
+          cz changelog || { echo "❌ Erro ao gerar changelog!"; exit 1; }
 
           echo "📤 Enviando alterações para o repositório..."
+          git add CHANGELOG.md
+          git commit -m "docs: update changelog"
           git push origin main --follow-tags || { echo "❌ Erro ao enviar alterações!"; exit 1; }
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -1,0 +1,4 @@
+pytest
+bump2version
+commitizen
+cz-conventional-changelog
