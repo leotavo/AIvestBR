@@ -21,7 +21,7 @@ pip install -r requirements.txt
 ## 🛠 Uso
 
 ```sh
-python src/main.py
+python src/aivestbr/main.py
 ```
 
 ## 🤝 Contribuição
