@@ -1,4 +1,9 @@
-## 0.2.0 (2025-03-06)
+## 0.3.0 (2025-03-06)
+
+### Fix
+
+- **pyproject.toml**: bug fixes control version
+- **pyproject.toml**: bug fix control version
 
 ## v0.1.5 (2025-03-03)
 
