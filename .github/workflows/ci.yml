@@ -51,7 +51,7 @@ jobs:
           git fetch --tags --force  # Garante que as tags locais estão atualizadas
 
           # Verifica se a tag já existe antes de tentar criar uma nova tag
-          TAG=$(cz bump --dry-run --check-consistency | grep 'tag to create:' | awk '{print $4}')
+          TAG=$(cz bump --dry-run --check-consistency --yes | grep 'tag to create:' | awk '{print $4}')
           if git rev-parse "$TAG" >/dev/null 2>&1; then
             echo "⚠️ Tag $TAG já existe! Continuando sem criar nova tag."
           else
