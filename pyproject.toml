@@ -32,3 +32,6 @@ tag = true
 
 [tool.bumpversion.file]
 "pyproject.toml" = { search = 'version = "{current_version}"', replace = 'version = "{new_version}"' }
+
+[tool.commitizen]
+version = "0.1.5"
