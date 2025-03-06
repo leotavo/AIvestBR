@@ -2,3 +2,4 @@ pytest
 bump2version
 commitizen
 lxml
+bs4
