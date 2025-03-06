@@ -35,3 +35,5 @@ tag = true
 
 [tool.commitizen]
 version = "0.2.0"
+tag_format = "v$version"
+update_files = ["pyproject.toml"]
