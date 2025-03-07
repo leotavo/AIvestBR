@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "AIvestBR"
-version = "0.3.1"
+version = "0.4.0"
 description = "Projeto de Análise de Investimentos"
 authors = [
     { name = "Leonardo Trindade", email = "leotavo@gmail.com" }
@@ -26,7 +26,7 @@ dependencies = [
 where = ["src"]  # Melhor forma de encontrar pacotes automaticamente
 
 [tool.bumpversion]
-current_version = "0.3.1"
+current_version = "0.4.0"
 commit = true
 tag = true
 
@@ -35,6 +35,6 @@ tag = true
 "src/aivestbr/__init__.py" = { search = '__version__ = "{current_version}"', replace = '__version__ = "{new_version}"' }
 
 [tool.commitizen]
-version = "0.3.1"  # Atualizado para manter consistência
+version = "0.4.0"  # Atualizado para manter consistência
 tag_format = "v$version"
 version_files = ["pyproject.toml", "src/aivestbr/__init__.py"]
