@@ -1,6 +1,0 @@
-[tool.commitizen]
-name = "cz_conventional_commits"
-version = "0.5.0"
-tag_format = "v$version"
-version_files = ["pyproject.toml", "src/aivestbr/__init__.py"]
-change_type_order = ["feat", "fix", "docs", "ci", "chore"]
