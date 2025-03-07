@@ -29,10 +29,10 @@ jobs:
         run: |
           poetry install
 
+      - name: ✅ Garantir que o pytest está instalado
+        run: |
+          poetry run pip install pytest
+
       - name: ✅ Rodar testes
         run: |
           poetry run pytest --maxfail=1 --disable-warnings -q
-
-      - name: 🧹 Limpar cache do Poetry
-        run: |
-          poetry cache clear --all pypi
