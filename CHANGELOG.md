@@ -2,6 +2,7 @@
 
 ### Fix
 
+- **cz_test.txt**: testando versao
 - removendo caractere inválido da versão no commitizen
 
 ## v0.4.0 (2025-03-06)
