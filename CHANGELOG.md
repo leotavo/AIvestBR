@@ -1,5 +1,7 @@
 ## Unreleased
 
+## v0.5.0 (2025-03-06)
+
 ### Fix
 
 - **cz_test.txt**: testando versao
