@@ -10,7 +10,7 @@ on:
 
 jobs:
   test:
-    runs-on: windows-latest  # Ou `ubuntu-latest` se preferir Linux
+    runs-on: windows-latest  # Alterado para usar Windows
 
     steps:
       - name: 🛎️ Checkout do código
@@ -23,7 +23,12 @@ jobs:
 
       - name: 📦 Instalar Poetry
         run: |
-          curl -sSL https://install.python-poetry.org | python3 -
+          curl -sSL https://install.python-poetry.org | python -
+
+      - name: 📦 Adicionar Poetry ao PATH
+        run: |
+          echo "Adding Poetry to PATH"
+          setx PATH "$env:PATH;C:\Users\runneradmin\AppData\Roaming\Python\Scripts"
 
       - name: 📦 Instalar dependências do Poetry
         run: |

@@ -3,7 +3,7 @@ import logging
 import csv
 from lxml import etree  # Para validar WSDL (XML)
 from bs4 import BeautifulSoup  # Para validar HTML
-from typing import Optional, Union, List, Dict
+from typing import Optional, Union, Dict
 
 class RequisicaoAPI:
     def __init__(self, url: str, formato_esperado: str = 'json'):
