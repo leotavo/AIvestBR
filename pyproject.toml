@@ -34,4 +34,4 @@ tag = true
 "pyproject.toml" = { search = 'version = "{current_version}"', replace = 'version = "{new_version}"' }
 
 [tool.commitizen]
-version = "0.2.0"
+version = "0.3.0"
