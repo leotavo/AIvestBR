@@ -35,6 +35,8 @@ tag = true
 "src/aivestbr/__init__.py" = { search = '__version__ = "{current_version}"', replace = '__version__ = "{new_version}"' }
 
 [tool.commitizen]
-version = "0.4.0"  # Atualizado para manter consistência
+name = "cz_conventional_commits"
+version = "0.4.0"  # Corrigido para refletir a última versão correta
 tag_format = "v$version"
 version_files = ["pyproject.toml", "src/aivestbr/__init__.py"]
+
