@@ -10,7 +10,7 @@ on:
 
 jobs:
   test:
-    runs-on: ubuntu-latest  # Ou `windows-latest` se preferir Windows
+    runs-on: windows-latest  # Ou `ubuntu-latest` se preferir Linux
 
     steps:
       - name: 🛎️ Checkout do código
