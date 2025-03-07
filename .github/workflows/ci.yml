@@ -62,7 +62,7 @@ jobs:
             cz changelog || { echo "❌ Erro ao gerar changelog!"; exit 1; }
 
             echo "📤 Enviando alterações para o repositório..."
-            git add pyproject.toml .cz.toml CHANGELOG.md
+            git add pyproject.toml .cz.toml CHANGELOG.md src/aivestbr/__init__.py
             git commit -m "chore: bump version to $NEW_VERSION"
             git push origin main --follow-tags || { echo "❌ Erro ao enviar alterações!"; exit 1; }
             git push --tags || { echo "❌ Erro ao enviar tags!"; exit 1; }
