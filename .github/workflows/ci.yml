@@ -50,23 +50,23 @@ jobs:
           echo "🔄 Sincronizando repositório..."
           git fetch --tags --force  # Garante que as tags locais estão atualizadas
 
-          # Verifica se a tag já existe antes de tentar criar uma nova tag
-          TAG=$(cz bump --dry-run --check-consistency --yes | grep 'tag to create:' | awk '{print $4}')
-          if git rev-parse "$TAG" >/dev/null 2>&1; then
-            echo "⚠️ Tag $TAG já existe! Continuando sem criar nova tag."
+          # Detecta a nova versão antes de criar a tag
+          NEW_VERSION=$(cz bump --yes --check-consistency | grep -oP '(?<=Bumping version: )\d+\.\d+\.\d+')
+
+          if [ -z "$NEW_VERSION" ]; then
+            echo "⚠️ Nenhuma nova versão detectada. Pulando criação de tag."
           else
-            echo "🚀 Atualizando versão com commitizen..."
-            cz bump --yes --check-consistency || { echo "❌ Erro no commitizen!"; exit 1; }
+            echo "📌 Nova versão detectada: $NEW_VERSION"
+            
+            echo "📄 Gerando changelog..."
+            cz changelog || { echo "❌ Erro ao gerar changelog!"; exit 1; }
+
+            echo "📤 Enviando alterações para o repositório..."
+            git add pyproject.toml .cz.toml CHANGELOG.md
+            git commit -m "chore: bump version to $NEW_VERSION"
+            git push origin main --follow-tags || { echo "❌ Erro ao enviar alterações!"; exit 1; }
+            git push --tags || { echo "❌ Erro ao enviar tags!"; exit 1; }
           fi
-
-          echo "📄 Gerando changelog..."
-          cz changelog || { echo "❌ Erro ao gerar changelog!"; exit 1; }
-
-          echo "📤 Enviando alterações para o repositório..."
-          git add CHANGELOG.md
-          git commit -m "docs: update changelog"
-          git push origin main --follow-tags || { echo "❌ Erro ao enviar alterações!"; exit 1; }
-          git push --tags || { echo "❌ Erro ao enviar tags!"; exit 1; }
         shell: /usr/bin/bash -e {0}
         env:
           pythonLocation: /opt/hostedtoolcache/Python/3.11.11/x64

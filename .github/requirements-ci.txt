@@ -1,5 +1,5 @@
 pytest
 bump2version
 commitizen
-lxml
+lxml==4.9.3  # Corrigido para garantir estabilidade
 bs4

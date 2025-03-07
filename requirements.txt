@@ -15,5 +15,4 @@ requests==2.32.3
 termcolor==2.5.0
 tomlkit==0.13.2
 urllib3==2.3.0
-wcwidth==0.2.13
-lxml
+lxml==4.9.3  # Agora com versão fixa para evitar problemas de compatibilidade
