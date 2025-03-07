@@ -9,70 +9,24 @@ on:
       - main
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
+  test:
+    runs-on: windows-latest
 
     steps:
       - name: 🛎️ Checkout do código
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0  # Puxa todas as tags para evitar problemas com bump2version
+        uses: actions/checkout@v2
 
       - name: 🐍 Configurar Python 3.11
         uses: actions/setup-python@v4
         with:
           python-version: "3.11"
 
-      - name: 📦 Instalar dependências do projeto
+      - name: 📦 Instalar dependências
         run: |
           python -m pip install --upgrade pip
-          pip install -r requirements.txt
-          pip install -e .  # Instala o pacote em modo editável
-
-      - name: 📦 Instalar dependências do workflow
-        run: |
-          pip install -r .github/requirements-ci.txt
+          pip install poetry
+          poetry install
 
       - name: ✅ Rodar testes
-        env:
-          PYTHONPATH: ${{ github.workspace }}/src  # Adiciona o diretório src ao PYTHONPATH
         run: |
-          echo "🔎 Executando testes com pytest..."
-          pytest tests/ || { echo "❌ Erro nos testes!"; exit 1; }
-
-      - name: 🔖 Atualizar versão e gerar changelog
-        run: |
-          set -e  # Faz o script falhar em qualquer erro
-
-          git config --global user.email "github-actions@github.com"
-          git config --global user.name "github-actions[bot]"
-
-          echo "🔄 Sincronizando repositório..."
-          git fetch --tags --force  # Garante que as tags locais estão atualizadas
-
-          # Detecta a nova versão antes de criar a tag
-          NEW_VERSION=$(cz bump --yes --check-consistency | grep -oP '(?<=Bumping version: )\d+\.\d+\.\d+')
-
-          if [ -z "$NEW_VERSION" ]; then
-            echo "⚠️ Nenhuma nova versão detectada. Pulando criação de tag."
-          else
-            echo "📌 Nova versão detectada: $NEW_VERSION"
-            
-            echo "📄 Gerando changelog..."
-            cz changelog || { echo "❌ Erro ao gerar changelog!"; exit 1; }
-
-            echo "📤 Enviando alterações para o repositório..."
-            git add pyproject.toml .cz.toml CHANGELOG.md src/aivestbr/__init__.py
-            git commit -m "chore: bump version to $NEW_VERSION"
-            git push origin main --follow-tags || { echo "❌ Erro ao enviar alterações!"; exit 1; }
-            git push --tags || { echo "❌ Erro ao enviar tags!"; exit 1; }
-          fi
-        shell: /usr/bin/bash -e {0}
-        env:
-          pythonLocation: /opt/hostedtoolcache/Python/3.11.11/x64
-          PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.11.11/x64/lib/pkgconfig
-          Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.11/x64
-          Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.11/x64
-          Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.11/x64
-          LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.11.11/x64/lib
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          poetry run pytest
