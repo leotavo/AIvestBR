@@ -10,7 +10,7 @@ on:
 
 jobs:
   test:
-    runs-on: windows-latest  # Use Windows
+    runs-on: windows-latest  # Alterado para usar Windows
 
     steps:
       - name: 🛎️ Checkout do código
@@ -32,7 +32,7 @@ jobs:
 
       - name: 📦 Instalar dependências do Poetry
         run: |
-          poetry install
+          C:\Users\runneradmin\AppData\Roaming\Python\Scripts\poetry.exe install
 
       - name: ✅ Garantir que o pytest está instalado
         run: |
