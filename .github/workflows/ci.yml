@@ -21,28 +21,36 @@ jobs:
         with:
           python-version: "3.11"
 
-      - name: 📦 Instalar Poetry (usando Action oficial)
+      - name: 📦 Instalar Poetry
         uses: abatilo/actions-poetry@v2
         with:
           poetry-version: "latest"
 
-      - name: 📦 Instalar dependências do Poetry
+      - name: 📦 Instalar dependências
         run: poetry install
 
-      - name: 🔍 Verificar formatação do código com Black
+      - name: 🛠️ Rodar pre-commit no CI
+        run: poetry run pre-commit run --all-files
+
+      - name: 📏 Rodar Black (formatação de código)
         run: poetry run black .
 
-      - name: 📑 Verificar organização de imports com isort
+      - name: 📦 Rodar isort (ordenação de imports)
         run: poetry run isort .
 
-      - name: 🔎 Analisar código com Flake8
+      - name: 🔍 Rodar Flake8 (verificação de estilo)
         run: poetry run flake8 .
 
-      - name: 🔬 Análise estática com mypy
+      - name: 🔍 Rodar análise com mypy
         run: poetry run mypy src
 
-      - name: 📊 Análise de qualidade do código com Pylint
-        run: poetry run pylint src
+      - name: 🔎 Rodar análise com pylint (nota mínima 9.0)
+        run: poetry run pylint src --fail-under=9.0
 
-      - name: ✅ Rodar testes
-        run: poetry run pytest --maxfail=1 --disable-warnings -q
+      - name: ✅ Rodar testes com cobertura
+        run: poetry run pytest --cov=src --cov-report=xml
+
+      - name: 📊 Publicar cobertura no CI
+        uses: codecov/codecov-action@v3
+        with:
+          file: ./coverage.xml
