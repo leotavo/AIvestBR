@@ -1,23 +1,27 @@
+import json
 import logging
 import os
-import json
 import sys
 from datetime import datetime
 
+
 class LoggerFactory:
     """
-    Classe responsável por configurar e fornecer loggers separados por módulo e arquivo.
+    Classe responsável por configurar e
+    fornecer loggers separados por módulo e arquivo.
     """
 
     LOG_DIR = "logs"
     FORMATTER = logging.Formatter(
-        json.dumps({
-            "timestamp": "%(asctime)s",
-            "level": "%(levelname)s",
-            "module": "%(name)s",
-            "message": "%(message)s"
-        }),
-        datefmt="%d/%m/%Y %H:%M"
+        json.dumps(
+            {
+                "timestamp": "%(asctime)s",
+                "level": "%(levelname)s",
+                "module": "%(name)s",
+                "message": "%(message)s",
+            }
+        ),
+        datefmt="%d/%m/%Y %H:%M",
     )
 
     @staticmethod
@@ -30,9 +34,13 @@ class LoggerFactory:
 
         # Criar nome do arquivo com data e hora
         timestamp = datetime.now().strftime("%d-%m-%Y_%H-%M")
-        log_filename = os.path.join(module_dir, f"{module_name}_{timestamp}.log")
+        log_filename = os.path.join(
+            module_dir,
+            f"{module_name}_{timestamp}.log",
+        )
 
-        # Criar logger com `force=True` para garantir que handlers não sejam reutilizados erroneamente
+        # Criar logger com `force=True` para garantir que handlers
+        # não sejam reutilizados erroneamente
         logger = logging.getLogger(module_name)
         logger.setLevel(logging.DEBUG)
 
@@ -41,11 +49,16 @@ class LoggerFactory:
             logger.handlers.pop()
 
         # Configurar log para arquivo
-        file_handler = logging.FileHandler(log_filename, mode="a", encoding="utf-8")
+        file_handler = logging.FileHandler(
+            log_filename,
+            mode="a",
+            encoding="utf-8",
+        )
         file_handler.setFormatter(LoggerFactory.FORMATTER)
 
         # Configurar log para console (stderr)
-        console_handler = logging.StreamHandler(sys.stderr)  # Forçar uso de stderr
+        console_handler = logging.StreamHandler(sys.stderr)
+        # Forçar uso de stderr
         console_handler.setFormatter(LoggerFactory.FORMATTER)
 
         # Adicionar handlers ao logger
@@ -53,3 +66,6 @@ class LoggerFactory:
         logger.addHandler(console_handler)
 
         return logger
+
+
+# Adicione uma linha vazia aqui para evitar W292

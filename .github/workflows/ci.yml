@@ -29,5 +29,14 @@ jobs:
       - name: 📦 Instalar dependências do Poetry
         run: poetry install
 
+      - name: 🔍 Verificar formatação do código com Black
+        run: poetry run black --check .
+
+      - name: 📑 Verificar organização de imports com isort
+        run: poetry run isort --check .
+
+      - name: 🔎 Analisar código com Flake8
+        run: poetry run flake8 .
+
       - name: ✅ Rodar testes
         run: poetry run pytest --maxfail=1 --disable-warnings -q
