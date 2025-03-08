@@ -1,5 +1,8 @@
 """
 Módulo principal do AIvestBR. Responsável por iniciar a aplicação.
+
+- Melhoria futura: Implementar integração com outros módulos
+do projeto para execução de tarefas específicas.
 """
 
 import logging
@@ -18,8 +21,6 @@ def main():
 
     # Exemplo de variável de configuração carregada do .env
     logging.info("Conectando ao banco de dados: %s", config.DATABASE_URL)
-
-    # TODO (melhoria futura): Implementar integração com outros módulos
 
     logging.info("Execução finalizada.")
 
