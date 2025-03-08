@@ -1,3 +1,8 @@
+"""
+Configuração centralizada de logging para o AIvestBR.
+Gera logs formatados em JSON e escreve tanto no console quanto em arquivos.
+"""
+
 import json
 import logging
 import os
@@ -5,7 +10,7 @@ import sys
 from datetime import datetime
 
 
-class LoggerFactory:
+class LoggerFactory:  # pylint: disable=too-few-public-methods
     """
     Classe responsável por configurar e
     fornecer loggers separados por módulo e arquivo.
@@ -39,8 +44,7 @@ class LoggerFactory:
             f"{module_name}_{timestamp}.log",
         )
 
-        # Criar logger com `force=True` para garantir que handlers
-        # não sejam reutilizados erroneamente
+        # Criar logger
         logger = logging.getLogger(module_name)
         logger.setLevel(logging.DEBUG)
 
@@ -58,7 +62,6 @@ class LoggerFactory:
 
         # Configurar log para console (stderr)
         console_handler = logging.StreamHandler(sys.stderr)
-        # Forçar uso de stderr
         console_handler.setFormatter(LoggerFactory.FORMATTER)
 
         # Adicionar handlers ao logger
@@ -68,4 +71,4 @@ class LoggerFactory:
         return logger
 
 
-# Adicione uma linha vazia aqui para evitar W292
+# Linha vazia no final para evitar W292

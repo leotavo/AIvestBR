@@ -1,6 +1,11 @@
+"""
+Módulo principal do AIvestBR. Responsável por iniciar a aplicação.
+"""
+
 import logging
 
 from config.settings import config
+
 
 
 def main():
@@ -13,9 +18,9 @@ def main():
     logging.info("Iniciando o projeto AIvestBR...")
 
     # Exemplo de variável de configuração carregada do .env
-    logging.info(f"Conectando ao banco de dados: {config.DATABASE_URL}")
+    logging.info("Conectando ao banco de dados: %s", config.DATABASE_URL)
 
-    # TODO: Chamar os módulos do projeto aqui
+    # TODO (melhoria futura): Implementar integração com outros módulos
 
     logging.info("Execução finalizada.")
 
@@ -23,4 +28,4 @@ def main():
 if __name__ == "__main__":
     main()
 
-# Adicione uma linha vazia aqui para evitar W292
+# Linha vazia no final para evitar W292

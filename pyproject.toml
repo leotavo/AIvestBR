@@ -27,9 +27,15 @@ pytest = "^8.3.5"
 black = {extras = ["jupyter"], version = "^25.1.0"}
 isort = "^6.0.1"
 flake8 = "^7.1.2"
+mypy = "^1.15.0"
+pylint = "^3.3.4"
 
 [tool.commitizen]
 name = "cz_conventional_commits"
 version = "0.2.0"
 tag_format = "v$version"
+
+[tool.pylint.MASTER]
+init-hook = 'import sys, os; sys.path.append(os.path.abspath("config"))'
+
 

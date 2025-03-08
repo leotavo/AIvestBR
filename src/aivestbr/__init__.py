@@ -1,6 +1,6 @@
-__version__ = "0.6.0"
+"""
+Módulo de inicialização do pacote AIvestBR.
+Define a versão do pacote e inicializa dependências.
+"""
 
-"""
-# Pacote carregado: aivestbr
-"""
-print("Pacote aivestbr carregado!")
+__version__ = "0.1.0"

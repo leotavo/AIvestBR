@@ -1,0 +1,2 @@
+[MASTER]
+init-hook='import sys, os; sys.path.extend([os.path.abspath("."), os.path.abspath("config")])'
