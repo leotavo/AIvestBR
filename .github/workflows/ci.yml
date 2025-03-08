@@ -10,16 +10,21 @@ on:
 
 jobs:
   test:
-    runs-on: windows-latest
+    name: Test on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        python-version: ["3.11"]
 
     steps:
       - name: 🛎️ Checkout do código
         uses: actions/checkout@v2
 
-      - name: 🐍 Configurar Python 3.11
+      - name: 🐍 Configurar Python
         uses: actions/setup-python@v4
         with:
-          python-version: "3.11"
+          python-version: ${{ matrix.python-version }}
 
       - name: 📦 Instalar Poetry
         uses: abatilo/actions-poetry@v2
@@ -27,30 +32,17 @@ jobs:
           poetry-version: "latest"
 
       - name: 📦 Instalar dependências
-        run: poetry install
+        run: poetry install --no-interaction
 
-      - name: 🛠️ Rodar pre-commit no CI
+      - name: 🛠️ Rodar pre-commit
         run: poetry run pre-commit run --all-files
 
-      - name: 📏 Rodar Black (formatação de código)
-        run: poetry run black .
-
-      - name: 📦 Rodar isort (ordenação de imports)
-        run: poetry run isort .
-
-      - name: 🔍 Rodar Flake8 (verificação de estilo)
-        run: poetry run flake8 .
-
-      - name: 🔍 Rodar análise com mypy
-        run: poetry run mypy src
-
-      - name: 🔎 Rodar análise com pylint (nota mínima 9.0)
-        run: poetry run pylint src --fail-under=9.0
-
       - name: ✅ Rodar testes com cobertura
-        run: poetry run pytest --cov=src --cov-report=xml
+        run: poetry run pytest --cov=src --cov-report=xml --cov-report=term-missing --maxfail=1 --disable-warnings -q
 
       - name: 📊 Publicar cobertura no CI
         uses: codecov/codecov-action@v3
         with:
           file: ./coverage.xml
+          fail_ci_if_error: true
+          verbose: true
