@@ -1,9 +1,9 @@
 [project]
 name = "aivestbr"
 version = "0.1.0"
-description = "Sistema recomendação de investimentos utilizando Séries Temporais, Machine e Learning e Análise Preditiva."
+description = "Sistema recomendação de investimentos utilizando Séries Temporais, Machine Learning e Análise Preditiva."
 authors = [
-    {name = "Leonardo Trindade",email = "leotavo@gmail.com"}
+    {name = "Leonardo Trindade", email = "leotavo@gmail.com"}
 ]
 license = {text = "MIT"}
 readme = "README.md"
@@ -15,7 +15,6 @@ dependencies = [
     "python-dotenv (>=1.0.1,<2.0.0)",
     "pytest (>=8.3.5,<9.0.0)"
 ]
-
 
 [build-system]
 requires = ["poetry-core>=2.0.0,<3.0.0"]
@@ -39,3 +38,8 @@ tag_format = "v$version"
 
 [tool.pylint.MASTER]
 init-hook = 'import sys, os; sys.path.append(os.path.abspath("config"))'
+
+[tool.mypy]
+ignore_missing_imports = true
+disallow_untyped_defs = true
+strict_optional = true
