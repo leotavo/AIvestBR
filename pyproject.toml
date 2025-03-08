@@ -29,6 +29,7 @@ isort = "^6.0.1"
 flake8 = "^7.1.2"
 mypy = "^1.15.0"
 pylint = "^3.3.4"
+pre-commit = "^4.1.0"
 
 [tool.commitizen]
 name = "cz_conventional_commits"
@@ -37,5 +38,3 @@ tag_format = "v$version"
 
 [tool.pylint.MASTER]
 init-hook = 'import sys, os; sys.path.append(os.path.abspath("config"))'
-
-
