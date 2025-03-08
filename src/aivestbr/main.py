@@ -7,7 +7,6 @@ import logging
 from config.settings import config
 
 
-
 def main():
     """Função principal do projeto AIvestBR."""
     logging.basicConfig(

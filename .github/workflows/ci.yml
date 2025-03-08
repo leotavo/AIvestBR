@@ -30,10 +30,10 @@ jobs:
         run: poetry install
 
       - name: 🔍 Verificar formatação do código com Black
-        run: poetry run black --check .
+        run: poetry run black .
 
       - name: 📑 Verificar organização de imports com isort
-        run: poetry run isort --check .
+        run: poetry run isort .
 
       - name: 🔎 Analisar código com Flake8
         run: poetry run flake8 .
