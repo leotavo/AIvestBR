@@ -10,7 +10,7 @@ on:
 
 jobs:
   test:
-    runs-on: windows-latest  # Alterado para usar Windows
+    runs-on: windows-latest
 
     steps:
       - name: 🛎️ Checkout do código
@@ -21,23 +21,13 @@ jobs:
         with:
           python-version: "3.11"
 
-      - name: 📦 Instalar Poetry
-        run: |
-          curl -sSL https://install.python-poetry.org | python -
-
-      - name: 📦 Garantir que Poetry está no PATH
-        run: |
-          $env:Path += ";C:\Users\runneradmin\AppData\Roaming\Python\Scripts"
-          echo "Poetry instalado e PATH atualizado!"
+      - name: 📦 Instalar Poetry (usando Action oficial)
+        uses: abatilo/actions-poetry@v2
+        with:
+          poetry-version: "latest"
 
       - name: 📦 Instalar dependências do Poetry
-        run: |
-          C:\Users\runneradmin\AppData\Roaming\Python\Scripts\poetry.exe install
-
-      - name: ✅ Garantir que o pytest está instalado
-        run: |
-          poetry run pip install pytest
+        run: poetry install
 
       - name: ✅ Rodar testes
-        run: |
-          poetry run pytest --maxfail=1 --disable-warnings -q
+        run: poetry run pytest --maxfail=1 --disable-warnings -q
