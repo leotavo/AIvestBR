@@ -32,6 +32,12 @@ jobs:
       - name: 📦 Instalar dependências
         run: poetry install --no-interaction
 
+      - name: 🛠️ Configurar PYTHONPATH
+        run: echo "PYTHONPATH=$PYTHONPATH:$(pwd):$(pwd)/src" >> $GITHUB_ENV
+
+      - name: 🧹 Limpar Cache do Python
+        run: find . -type d -name "__pycache__" -exec rm -r {} + || true
+
       - name: ✅ Rodar testes com cobertura
         run: poetry run pytest --cov=src --cov-report=xml --disable-warnings
 
