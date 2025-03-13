@@ -1,0 +1,4 @@
+#GET https://api.bcb.gov.br/dados/serie/bcdata.sgs.11/dados?formato=json
+#GET https://api.bcb.gov.br/dados/serie/bcdata.sgs.11/dados?formato=csv
+#GET https://www3.bcb.gov.br/sgspub/JSP/sgsgeral/FachadaWSSGS.wsdl
+#GET https://www3.bcb.gov.br/sgspub/consultarvalores/consultarValoresSeries.do?method=consultarGraficoPorId&hdOidSeriesSelecionadas=11

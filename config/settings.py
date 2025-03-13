@@ -1,29 +1,27 @@
+"""Configuração do sistema AIvestBR."""
+
 import os
-
-from dotenv import load_dotenv
-
-# Carregar variáveis do arquivo .env
-load_dotenv()
 
 
 class Config:
-    """Classe para centralizar as configurações do projeto."""
+    """Classe para centralizar as configurações do sistema AIvestBR."""
 
-    # Carregar variáveis de ambiente, ou valores padrão se não encontradas
-    DATABASE_URL = os.getenv("DATABASE_URL", "sqlite:///data/aivestbr.db")
-    API_KEY = os.getenv("API_KEY", "SUA_CHAVE_AQUI")
-    BACEN_API_BASE_URL = os.getenv(
-        "BACEN_API_BASE_URL", "https://api.bcb.gov.br/dados/serie/bcdata.sgs"
-    )
-    LOG_LEVEL = os.getenv("LOG_LEVEL", "INFO")
+    def __init__(self) -> None:
+        """Inicializa as configurações do sistema."""
+        self._settings: dict[str, str] = {
+            "DATABASE_URL": os.getenv("DATABASE_URL", "sqlite:///data/aivestbr.db"),
+            "API_KEY": os.getenv("API_KEY", "SUA_CHAVE_AQUI"),
+            "LOG_LEVEL": os.getenv("LOG_LEVEL", "INFO"),
+            "BACEN_API_BASE_URL": os.getenv(
+                "BACEN_API_BASE_URL", "https://api.bcb.gov.br/dados/serie/bcdata.sgs"
+            ),
+        }
 
+    def get(self, key: str) -> str:
+        """Obtém o valor de uma configuração pelo nome da chave."""
+        return self._settings.get(key, "")
 
-# Criar uma instância global das configurações
-config = Config()
-
-# Exemplo de uso
-if __name__ == "__main__":
-    print(f"URL do Banco de Dados: {config.DATABASE_URL}")
-    print(f"URL BASE da API do BACEN em csv: {config.BACEN_API_BASE_URL}")
-    print(f"API Key: {config.API_KEY}")
-    print(f"Nível de Log: {config.LOG_LEVEL}")
+    def all(self) -> dict[str, str]:
+        """Retorna todas as configurações disponíveis."""
+        return self._settings.copy()
+        return self._settings.copy()

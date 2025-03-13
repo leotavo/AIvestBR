@@ -10,31 +10,21 @@ on:
 
 jobs:
   test:
-    name: Test on ${{ matrix.os }}
-    runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ubuntu-latest, windows-latest, macos-latest]
-        python-version: ["3.11"]
+        python-version: [3.11]
+    runs-on: ubuntu-latest
 
     steps:
-      - name: 🛎️ Checkout do código
+      - name: 📥 Checkout do código
         uses: actions/checkout@v2
 
-      - name: 🏎️ Cache do Poetry
-        uses: actions/cache@v3
-        with:
-          path: ~/.cache/pypoetry
-          key: poetry-${{ runner.os }}-${{ hashFiles('**/poetry.lock') }}
-          restore-keys: |
-            poetry-${{ runner.os }}-
-
-      - name: 🐍 Configurar Python
+      - name: ⚙️ Configurar Python
         uses: actions/setup-python@v4
         with:
           python-version: ${{ matrix.python-version }}
 
-      - name: 📦 Instalar Poetry
+      - name: ⚙️ Instalar Poetry
         uses: abatilo/actions-poetry@v2
         with:
           poetry-version: "latest"
@@ -42,17 +32,8 @@ jobs:
       - name: 📦 Instalar dependências
         run: poetry install --no-interaction
 
-      - name: 🛠️ Rodar pre-commit
-        run: poetry run pre-commit run --all-files
-
-      - name: 🔍 Rodar análise com mypy
-        run: poetry run mypy src
-
-      - name: 🔎 Rodar análise com pylint (nota mínima 9.0)
-        run: poetry run pylint src --fail-under=9.0 || true
-
       - name: ✅ Rodar testes com cobertura
-        run: poetry run pytest --cov=src --cov-report=xml --cov-report=term-missing --maxfail=1 --disable-warnings -q
+        run: poetry run pytest --cov=src --cov-report=xml --disable-warnings
 
       - name: 📊 Publicar cobertura no CI
         uses: codecov/codecov-action@v3

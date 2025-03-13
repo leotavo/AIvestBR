@@ -1,31 +1,27 @@
-"""
-Módulo principal do AIvestBR. Responsável por iniciar a aplicação.
+"""Módulo principal do AIvestBR."""
 
-- Melhoria futura: Implementar integração com outros módulos
-do projeto para execução de tarefas específicas.
-"""
+import os
 
-import logging
+from flask import Flask
 
-from config.settings import config
+from aivestbr.utils.logging_config import LoggerFactory
+from config.settings import Config
+
+app = Flask(__name__)
 
 
-def main():
-    """Função principal do projeto AIvestBR."""
-    logging.basicConfig(
-        level=config.LOG_LEVEL,
-        format="%(asctime)s - %(levelname)s - %(message)s",
-    )
+logger = LoggerFactory.get_logger(__name__)
+config = Config()  # Instancia a classe Config
 
-    logging.info("Iniciando o projeto AIvestBR...")
 
-    # Exemplo de variável de configuração carregada do .env
-    logging.info("Conectando ao banco de dados: %s", config.DATABASE_URL)
-
-    logging.info("Execução finalizada.")
+def main() -> None:
+    """Função principal do sistema AIvestBR."""
+    logger.info("Iniciando AIvestBR...")
+    logger.info("Conectando ao banco de dados: %s", config.get("DATABASE_URL"))
+    logger.info("Sistema inicializado com sucesso!")
 
 
 if __name__ == "__main__":
     main()
-
-# Linha vazia no final para evitar W292
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=port)

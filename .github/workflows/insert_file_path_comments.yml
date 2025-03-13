@@ -1,0 +1,85 @@
+name: Insert File Path Comments
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+    paths:
+      - 'config/**'
+      - 'data/**'
+      - 'docs/**'
+      - 'models/**'
+      - 'notebooks/**'
+      - 'prompts/**'
+      - 'src/**'
+      - 'tests/**'
+  pull_request:
+    branches:
+      - main
+      - develop
+    paths:
+      - 'config/**'
+      - 'data/**'
+      - 'docs/**'
+      - 'models/**'
+      - 'notebooks/**'
+      - 'prompts/**'
+      - 'src/**'
+      - 'tests/**'
+  workflow_dispatch:
+
+jobs:
+  add-comments:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Add file path comments
+        run: |
+          python <<EOF
+          import os
+          from pathlib import Path
+
+          INCLUDE_DIRS = ['config', 'data', 'docs', 'models', 'notebooks', 'prompts', 'src', 'tests']
+          INCLUDE_EXTENSIONS = ['.py', '.json', '.yaml', '.yml', '.toml', '.ini', '.md', '.rst', '.txt', '.ps1', '.sh', '.bat']
+          PROJECT_ROOT = Path.cwd()
+
+          def update_file(file_path: Path):
+              relative_path = file_path.relative_to(PROJECT_ROOT)
+              comment = f"# Caminho: {relative_path.as_posix()}\n"
+              with file_path.open('r+', encoding='utf-8') as file:
+                  lines = file.readlines()
+                  if lines and lines[0].startswith('# Caminho:'):
+                      if lines[0] != comment:
+                          lines[0] = comment
+                  else:
+                      lines.insert(0, comment)
+                  file.seek(0)
+                  file.writelines(lines)
+                  file.truncate()
+
+          for dir_name in INCLUDE_DIRS:
+              for root, _, files in os.walk(dir_name):
+                  for file in files:
+                      if any(file.endswith(ext) for ext in INCLUDE_EXTENSIONS):
+                          update_file(Path(root) / file)
+          EOF
+
+      - name: Commit and push changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add .
+          if ! git diff --cached --quiet; then
+            git commit -m "chore: insert file path comments [automated]"
+            git push
+          else
+            echo "No changes to commit."

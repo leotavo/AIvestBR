@@ -1,0 +1,30 @@
+name: Scheduled Run
+
+on:
+  workflow_dispatch:  # Permite execução manual
+  # schedule:
+  #   - cron: "0 10 * * 1-5"  # Executa todo dia útil às 07:00 BRT (UTC−3)
+
+jobs:
+  scheduled-run:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📥 Checkout do código
+        uses: actions/checkout@v2
+
+      - name: ⚙️ Configurar Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: ⚙️ Instalar Poetry
+        uses: abatilo/actions-poetry@v2
+        with:
+          poetry-version: "latest"
+
+      - name: 📦 Instalar dependências com Poetry
+        run: poetry install --no-interaction
+
+      - name: 🚀 Executar o script principal
+        run: poetry run python src/aivestbr/main.py
